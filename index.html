@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -13,9 +13,12 @@
       --accent-dark: #8f3811;
       --card: #ffffff;
       --border: #ead8cb;
+      --success: #2e7d32;
     }
 
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -60,10 +63,23 @@
       border-radius: 10px;
       font-weight: bold;
       transition: 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
     }
 
     .btn:hover {
       background: var(--accent-dark);
+    }
+
+    .btn.secondary {
+      background: white;
+      color: var(--accent-dark);
+      border: 1px solid var(--border);
+    }
+
+    .btn.success {
+      background: var(--success);
     }
 
     nav {
@@ -127,6 +143,9 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0,0,0,.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .card img {
@@ -138,6 +157,9 @@
 
     .card-content {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .card h3 {
@@ -149,17 +171,27 @@
       font-weight: bold;
       color: var(--accent);
       margin-top: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
     }
 
     .about-grid,
-    .contact-grid {
+    .contact-grid,
+    .order-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
       align-items: start;
     }
 
-    .info-box {
+    .info-box,
+    .order-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -186,6 +218,46 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 40px 24px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: white;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .order-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
     }
 
     footer {
@@ -221,6 +293,7 @@
       <div class="brand">ThugEye Silogan</div>
       <div class="nav-links">
         <a href="#menu">Menu</a>
+        <a href="#order">Order</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
@@ -240,6 +313,9 @@
 
   <section id="menu">
     <h2>Best Sellers</h2>
+    <p class="section-text">
+      Browse our favorite silog meals and click order to fill the form instantly.
+    </p>
 
     <div class="cards">
       <div class="card">
@@ -248,6 +324,9 @@
           <h3>Tapsilog</h3>
           <p>Marinated beef tapa, garlic rice, and egg.</p>
           <div class="price">₱99</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Tapsilog')">Order Tapsilog</button>
+          </div>
         </div>
       </div>
 
@@ -255,8 +334,11 @@
         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sisilog" />
         <div class="card-content">
           <h3>Sisilog</h3>
-          <p>Sweet pork tocino, garlic rice, and egg.</p>
+          <p>Sizzling sisig, garlic rice, and egg.</p>
           <div class="price">₱89</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Sisilog')">Order Sisilog</button>
+          </div>
         </div>
       </div>
 
@@ -264,8 +346,11 @@
         <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Porksilog" />
         <div class="card-content">
           <h3>Porksilog</h3>
-          <p>Juicy longganisa, garlic rice, and egg.</p>
+          <p>Seasoned pork, garlic rice, and egg.</p>
           <div class="price">₱85</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Porksilog')">Order Porksilog</button>
+          </div>
         </div>
       </div>
 
@@ -273,8 +358,11 @@
         <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80" alt="ChixSilog" />
         <div class="card-content">
           <h3>ChixSilog</h3>
-          <p>Crispy bangus, garlic rice, and egg.</p>
+          <p>Chicken meal, garlic rice, and egg.</p>
           <div class="price">₱109</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('ChixSilog')">Order ChixSilog</button>
+          </div>
         </div>
       </div>
 
@@ -284,6 +372,9 @@
           <h3>Hotsilog</h3>
           <p>Hotdog, garlic rice, and egg.</p>
           <div class="price">₱79</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Hotsilog')">Order Hotsilog</button>
+          </div>
         </div>
       </div>
 
@@ -291,8 +382,11 @@
         <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80" alt="Shangsilog" />
         <div class="card-content">
           <h3>Shangsilog</h3>
-          <p>Fried chicken fillet, garlic rice, and egg.</p>
+          <p>Shanghai, garlic rice, and egg.</p>
           <div class="price">₱99</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Shangsilog')">Order Shangsilog</button>
+          </div>
         </div>
       </div>
 
@@ -300,8 +394,11 @@
         <img src="https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=800&q=80" alt="Siomaisilog" />
         <div class="card-content">
           <h3>Siomaisilog</h3>
-          <p>Fried chicken fillet, garlic rice, and egg.</p>
+          <p>Siomai, garlic rice, and egg.</p>
           <div class="price">₱99</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Siomaisilog')">Order Siomaisilog</button>
+          </div>
         </div>
       </div>
 
@@ -309,8 +406,80 @@
         <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80" alt="Cornsilog" />
         <div class="card-content">
           <h3>Cornsilog</h3>
-          <p>Fried chicken fillet, garlic rice, and egg.</p>
+          <p>Corned beef, garlic rice, and egg.</p>
           <div class="price">₱99</div>
+          <div class="card-actions">
+            <button class="btn" onclick="selectMeal('Cornsilog')">Order Cornsilog</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <h2>Place Your Order</h2>
+    <p class="section-text">
+      Choose your meal, fill out the form, and send your order directly through Facebook Messenger.
+    </p>
+
+    <div class="order-grid">
+      <div class="order-box">
+        <form id="orderForm">
+          <div>
+            <label for="customerName">Your Name</label>
+            <input type="text" id="customerName" placeholder="Enter your name" required />
+          </div>
+
+          <div>
+            <label for="customerPhone">Phone Number</label>
+            <input type="tel" id="customerPhone" placeholder="09XX-XXX-XXXX" required />
+          </div>
+
+          <div>
+            <label for="meal">Select Meal</label>
+            <select id="meal" required>
+              <option value="">Choose a meal</option>
+              <option value="Tapsilog">Tapsilog - ₱99</option>
+              <option value="Sisilog">Sisilog - ₱89</option>
+              <option value="Porksilog">Porksilog - ₱85</option>
+              <option value="ChixSilog">ChixSilog - ₱109</option>
+              <option value="Hotsilog">Hotsilog - ₱79</option>
+              <option value="Shangsilog">Shangsilog - ₱99</option>
+              <option value="Siomaisilog">Siomaisilog - ₱99</option>
+              <option value="Cornsilog">Cornsilog - ₱99</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" min="1" value="1" required />
+          </div>
+
+          <div>
+            <label for="notes">Notes</label>
+            <textarea id="notes" placeholder="Extra rice, no egg, add drinks, etc."></textarea>
+          </div>
+
+          <button type="submit" class="btn success">Send Order on Facebook</button>
+        </form>
+      </div>
+
+      <div class="order-box">
+        <h3>How Ordering Works</h3>
+        <p class="order-note">
+          This version uses Facebook Messenger so customers can send their order quickly.
+          It is simple, easy, and works well for a small local business.
+        </p>
+        <ul>
+          <li>Click any <strong>Order</strong> button from the menu</li>
+          <li>The selected meal will appear in the form</li>
+          <li>Fill in customer details</li>
+          <li>Submit to send the order through Facebook</li>
+        </ul>
+
+        <div class="quick-links">
+          <a class="btn secondary" href="tel:09934195077">Call Now</a>
+          <a class="btn secondary" href="https://www.facebook.com/profile.php?id=61572936666348" target="_blank">Open Facebook Page</a>
         </div>
       </div>
     </div>
@@ -321,7 +490,7 @@
       <div>
         <h2>About the Business</h2>
         <p class="section-text">
-          Welcome to ThugEye Silogan! We offer mouth Watering and Delicious Silog meals na siguradong Babalik-balikan!
+          Welcome to ThugEye Silogan! We offer mouth-watering and delicious silog meals na siguradong babalik-balikan.
         </p>
         <div class="info-box">
           <h3>Why Customers Love Us</h3>
@@ -337,13 +506,13 @@
       <div class="info-box">
         <h3>Opening Hours</h3>
         <ul class="hours">
-          <li>Sunday - 24hours</li>
-          <li>Monday - 24hours</li>
-          <li>Tuesday - 24hours</li>
-          <li>Wednesday - 24hours</li>
-          <li>Thursday - 24hours</li>
-          <li>Friday - 24hours</li>
-          <li>Saturday - 24hours</li>
+          <li>Sunday - 24 hours</li>
+          <li>Monday - 24 hours</li>
+          <li>Tuesday - 24 hours</li>
+          <li>Wednesday - 24 hours</li>
+          <li>Thursday - 24 hours</li>
+          <li>Friday - 24 hours</li>
+          <li>Saturday - 24 hours</li>
         </ul>
       </div>
     </div>
@@ -352,7 +521,7 @@
   <section id="contact">
     <h2>Visit or Contact Us</h2>
     <p class="section-text">
-      Add the real address, contact number, Facebook page, and Google Maps location here.
+      Visit our store, call us directly, or message us on Facebook for fast orders.
     </p>
 
     <div class="contact-grid">
@@ -360,11 +529,14 @@
         <h3>Contact Details</h3>
         <ul class="contact-list">
           <li><strong>Address:</strong> Poblacion District III Julita, Leyte Philippines</li>
-          <li><strong>Phone:</strong> 0993-419-5077</li>
-          <li><strong>Facebook:</strong> ThugEye Silogan</li>
+          <li><strong>Phone:</strong> <a href="tel:09934195077">0993-419-5077</a></li>
+          <li><strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61572936666348" target="_blank">ThugEye Silogan</a></li>
           <li><strong>For Orders:</strong> Call or message us on Facebook</li>
         </ul>
-        <a class="btn" href="https://www.facebook.com/profile.php?id=61572936666348" target="_blank">Message on Facebook</a>
+        <div class="quick-links">
+          <a class="btn" href="https://www.facebook.com/profile.php?id=61572936666348" target="_blank">Message on Facebook</a>
+          <a class="btn secondary" href="tel:09934195077">Call Now</a>
+        </div>
       </div>
 
       <div>
@@ -379,13 +551,36 @@
       <p>
         Fast, filling, and budget-friendly meals for everyone.
       </p>
-      <a class="btn" href="#contact">Contact Us Now</a>
+      <a class="btn" href="#order">Order Now</a>
     </div>
   </section>
 
   <footer>
-    © 2026 Bossing Silogan. All rights reserved.<br/>
+    © 2026 ThugEye Silogan. All rights reserved.<br/>
     Website made with care for a local Filipino business.
   </footer>
+
+  <script>
+    function selectMeal(mealName) {
+      document.getElementById('meal').value = mealName;
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const meal = document.getElementById('meal').value;
+      const quantity = document.getElementById('quantity').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      const message = `Hello ThugEye Silogan!%0A%0AI want to order:%0A- Meal: ${meal}%0A- Quantity: ${quantity}%0A- Name: ${name}%0A- Phone: ${phone}%0A- Notes: ${notes || 'None'}`;
+      const facebookPage = 'https://www.facebook.com/profile.php?id=61572936666348';
+
+      alert('Your order details are ready. Please send this order message to the Facebook page.');
+      window.open(facebookPage, '_blank');
+    });
+  </script>
 </body>
 </html>
