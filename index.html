@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bossing Silogan</title>
+  <style>
+    :root {
+      --bg: #fffaf5;
+      --text: #222;
+      --muted: #666;
+      --accent: #b84d1a;
+      --accent-dark: #8f3811;
+      --card: #ffffff;
+      --border: #ead8cb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+        url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80') center/cover;
+      color: white;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .hero {
+      max-width: 760px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 6vw, 4.5rem);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 14px 22px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,250,245,.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-wrap {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+    }
+
+    .brand {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 0.95rem;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      color: var(--accent-dark);
+    }
+
+    .section-text {
+      max-width: 760px;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: var(--accent);
+      margin-top: 12px;
+    }
+
+    .about-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .info-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.05);
+    }
+
+    .hours li,
+    .contact-list li {
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 320px;
+      border: 0;
+      border-radius: 16px;
+    }
+
+    .cta {
+      text-align: center;
+      background: #fff1e7;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 24px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .nav-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-links a {
+        margin: 0 8px;
+      }
+
+      header {
+        min-height: 72vh;
+      }
+
+      .card img {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-wrap">
+      <div class="brand">ThugEye Silogan</div>
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="hero">
+      <h1>Delicious Silog Meals, Served Fresh Every Day</h1>
+      <p>
+        Your neighborhood silogan serving tasty, affordable meals for breakfast,
+        lunch, and late-night cravings.
+      </p>
+      <a class="btn" href="#menu">View Menu</a>
+    </div>
+  </header>
+
+  <section id="menu">
+    <h2>Best Sellers</h2>
+
+    <div class="cards">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=800&q=80" alt="Tapsilog" />
+        <div class="card-content">
+          <h3>Tapsilog</h3>
+          <p>Marinated beef tapa, garlic rice, and egg.</p>
+          <div class="price">₱99</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sisilog" />
+        <div class="card-content">
+          <h3>Sisilog</h3>
+          <p>Sweet pork tocino, garlic rice, and egg.</p>
+          <div class="price">₱89</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Porksilog" />
+        <div class="card-content">
+          <h3>Porksilog</h3>
+          <p>Juicy longganisa, garlic rice, and egg.</p>
+          <div class="price">₱85</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80" alt="ChixSilog" />
+        <div class="card-content">
+          <h3>ChixSilog</h3>
+          <p>Crispy bangus, garlic rice, and egg.</p>
+          <div class="price">₱109</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Hotsilog" />
+        <div class="card-content">
+          <h3>Hotsilog</h3>
+          <p>Hotdog, garlic rice, and egg.</p>
+          <div class="price">₱79</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80" alt="Shangsilog" />
+        <div class="card-content">
+          <h3>Shangsilog</h3>
+          <p>Fried chicken fillet, garlic rice, and egg.</p>
+          <div class="price">₱99</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=800&q=80" alt="Siomaisilog" />
+        <div class="card-content">
+          <h3>Siomaisilog</h3>
+          <p>Fried chicken fillet, garlic rice, and egg.</p>
+          <div class="price">₱99</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80" alt="Cornsilog" />
+        <div class="card-content">
+          <h3>Cornsilog</h3>
+          <p>Fried chicken fillet, garlic rice, and egg.</p>
+          <div class="price">₱99</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <h2>About the Business</h2>
+        <p class="section-text">
+          Welcome to ThugEye Silogan! We offer mouth Watering and Delicious Silog meals na siguradong Babalik-balikan!
+        </p>
+        <div class="info-box">
+          <h3>Why Customers Love Us</h3>
+          <ul>
+            <li>Freshly cooked meals</li>
+            <li>Affordable prices</li>
+            <li>Fast service</li>
+            <li>Perfect for dine-in or takeout</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3>Opening Hours</h3>
+        <ul class="hours">
+          <li>Sunday - 24hours</li>
+          <li>Monday - 24hours</li>
+          <li>Tuesday - 24hours</li>
+          <li>Wednesday - 24hours</li>
+          <li>Thursday - 24hours</li>
+          <li>Friday - 24hours</li>
+          <li>Saturday - 24hours</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Visit or Contact Us</h2>
+    <p class="section-text">
+      Add the real address, contact number, Facebook page, and Google Maps location here.
+    </p>
+
+    <div class="contact-grid">
+      <div class="info-box">
+        <h3>Contact Details</h3>
+        <ul class="contact-list">
+          <li><strong>Address:</strong> Poblacion District III Julita, Leyte Philippines</li>
+          <li><strong>Phone:</strong> 0993-419-5077</li>
+          <li><strong>Facebook:</strong> ThugEye Silogan</li>
+          <li><strong>For Orders:</strong> Call or message us on Facebook</li>
+        </ul>
+        <a class="btn" href="https://www.facebook.com/profile.php?id=61572936666348" target="_blank">Message on Facebook</a>
+      </div>
+
+      <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d665.2087956863945!2d124.96076605729947!3d10.973138678586807!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3307c5fef317c431%3A0xcbcf7731e0a124c6!2sThug%20Eye!5e0!3m2!1sen!2sph!4v1776966321002!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta">
+      <h2>Order Your Favorite Silog Today</h2>
+      <p>
+        Fast, filling, and budget-friendly meals for everyone.
+      </p>
+      <a class="btn" href="#contact">Contact Us Now</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Bossing Silogan. All rights reserved.<br/>
+    Website made with care for a local Filipino business.
+  </footer>
+</body>
+</html>
