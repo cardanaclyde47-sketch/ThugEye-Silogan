@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,6 +14,7 @@
       --card: #ffffff;
       --border: #ead8cb;
       --success: #2e7d32;
+      --danger: #b3261e;
     }
 
     * { box-sizing: border-box; }
@@ -26,6 +27,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      padding-bottom: 0;
     }
 
     header {
@@ -40,13 +42,12 @@
       padding: 24px;
     }
 
-    .hero {
-      max-width: 760px;
-    }
+    .hero { max-width: 760px; }
 
     .hero h1 {
       font-size: clamp(2.3rem, 6vw, 4.5rem);
       margin-bottom: 12px;
+      line-height: 1.1;
     }
 
     .hero p {
@@ -66,11 +67,11 @@
       border: none;
       cursor: pointer;
       font-size: 0.95rem;
+      font-family: inherit;
+      text-align: center;
     }
 
-    .btn:hover {
-      background: var(--accent-dark);
-    }
+    .btn:hover { background: var(--accent-dark); }
 
     .btn.secondary {
       background: white;
@@ -78,8 +79,15 @@
       border: 1px solid var(--border);
     }
 
-    .btn.success {
-      background: var(--success);
+    .btn.secondary:hover { background: #fff1e7; }
+
+    .btn.success { background: var(--success); }
+    .btn.success:hover { background: #1f5d23; }
+
+    .btn.danger {
+      background: var(--danger);
+      padding: 9px 12px;
+      font-size: 0.85rem;
     }
 
     nav {
@@ -98,6 +106,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 14px 20px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -111,12 +121,23 @@
       text-decoration: none;
       margin-left: 18px;
       font-size: 0.95rem;
+      display: inline-block;
+      padding: 8px 0;
+    }
+
+    .cart-pill {
+      background: var(--accent);
+      color: white !important;
+      padding: 8px 12px !important;
+      border-radius: 999px;
+      margin-left: 18px;
     }
 
     section {
       max-width: 1100px;
       margin: auto;
       padding: 70px 20px;
+      width: 100%;
     }
 
     h2 {
@@ -153,6 +174,7 @@
       height: 180px;
       object-fit: cover;
       display: block;
+      aspect-ratio: 4 / 3;
     }
 
     .card-content {
@@ -183,7 +205,7 @@
 
     .about-grid,
     .contact-grid,
-    .order-grid {
+    .checkout-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
@@ -191,7 +213,7 @@
     }
 
     .info-box,
-    .order-box {
+    .checkout-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -212,12 +234,62 @@
       border-radius: 16px;
     }
 
-    .cta {
+    .cart-empty {
+      color: var(--muted);
+      background: #fff7f0;
+      border: 1px dashed var(--border);
+      padding: 18px;
+      border-radius: 12px;
       text-align: center;
-      background: #fff1e7;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item:last-child { border-bottom: none; }
+
+    .cart-item strong { display: block; }
+
+    .cart-item small {
+      color: var(--muted);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+    }
+
+    .qty-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 24px;
+      background: white;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 2px solid var(--border);
     }
 
     form {
@@ -235,10 +307,10 @@
     select,
     textarea {
       width: 100%;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 16px;
       font-family: inherit;
       background: white;
     }
@@ -260,6 +332,14 @@
       margin-top: 18px;
     }
 
+    .cta {
+      text-align: center;
+      background: #fff1e7;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 24px;
+    }
+
     footer {
       text-align: center;
       padding: 28px 20px 40px;
@@ -267,23 +347,122 @@
       font-size: 0.95rem;
     }
 
+    .mobile-sticky-bar { display: none; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 95px;
+      transform: translateX(-50%);
+      background: #222;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+      z-index: 200;
+      text-align: center;
+      width: max-content;
+      max-width: 90%;
+    }
+
+    .toast.show {
+      opacity: 1;
+      bottom: 110px;
+    }
+
     @media (max-width: 700px) {
+      body { padding-bottom: 84px; }
+
       .nav-wrap {
         flex-direction: column;
+        align-items: stretch;
         gap: 10px;
       }
 
-      .nav-links a {
-        margin: 0 8px;
+      .brand { text-align: center; }
+
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        width: 100%;
+      }
+
+      .nav-links a,
+      .cart-pill {
+        margin: 0;
+        text-align: center;
+        background: white;
+        color: var(--text) !important;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 12px !important;
+      }
+
+      .cart-pill {
+        background: var(--accent) !important;
+        color: white !important;
       }
 
       header {
         min-height: 72vh;
+        padding: 20px 16px;
       }
 
-      .card img {
-        height: 160px;
+      .hero p { font-size: 1rem; }
+
+      section { padding: 48px 16px; }
+
+      h2 { font-size: 1.7rem; }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
+
+      .card img { height: 210px; }
+
+      .card-content,
+      .info-box,
+      .checkout-box { padding: 18px; }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+        padding: 14px 16px;
+      }
+
+      .quick-links { flex-direction: column; }
+
+      iframe { min-height: 260px; }
+
+      .cart-item {
+        grid-template-columns: 1fr;
+      }
+
+      .quantity-controls {
+        justify-content: flex-start;
+      }
+
+      .mobile-sticky-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 12px 14px;
+        background: rgba(255, 250, 245, 0.98);
+        border-top: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+      }
+
+      .mobile-sticky-bar .btn { margin: 0; }
     }
   </style>
 </head>
@@ -293,9 +472,10 @@
       <div class="brand">ThugEye Silogan</div>
       <div class="nav-links">
         <a href="#menu">Menu</a>
-        <a href="#order">Order</a>
+        <a href="#checkout">Checkout</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a class="cart-pill" href="#checkout">Cart: <span id="cartCount">0</span></a>
       </div>
     </div>
   </nav>
@@ -314,7 +494,7 @@
   <section id="menu">
     <h2>Best Sellers</h2>
     <p class="section-text">
-      Browse our favorite silog meals and click order to fill the form instantly.
+      Add your favorite silog meals to the cart, review your total, then send your order through Facebook.
     </p>
 
     <div class="cards">
@@ -325,7 +505,7 @@
           <p>Marinated beef tapa, garlic rice, and egg.</p>
           <div class="price">₱99</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Tapsilog')">Order Tapsilog</button>
+            <button class="btn" onclick="addToCart('Tapsilog', 99)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -337,7 +517,7 @@
           <p>Sizzling sisig, garlic rice, and egg.</p>
           <div class="price">₱89</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Sisilog')">Order Sisilog</button>
+            <button class="btn" onclick="addToCart('Sisilog', 89)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -349,7 +529,7 @@
           <p>Seasoned pork, garlic rice, and egg.</p>
           <div class="price">₱85</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Porksilog')">Order Porksilog</button>
+            <button class="btn" onclick="addToCart('Porksilog', 85)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -361,7 +541,7 @@
           <p>Chicken meal, garlic rice, and egg.</p>
           <div class="price">₱109</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('ChixSilog')">Order ChixSilog</button>
+            <button class="btn" onclick="addToCart('ChixSilog', 109)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -373,7 +553,7 @@
           <p>Hotdog, garlic rice, and egg.</p>
           <div class="price">₱79</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Hotsilog')">Order Hotsilog</button>
+            <button class="btn" onclick="addToCart('Hotsilog', 79)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -385,7 +565,7 @@
           <p>Shanghai, garlic rice, and egg.</p>
           <div class="price">₱99</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Shangsilog')">Order Shangsilog</button>
+            <button class="btn" onclick="addToCart('Shangsilog', 99)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -397,7 +577,7 @@
           <p>Siomai, garlic rice, and egg.</p>
           <div class="price">₱99</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Siomaisilog')">Order Siomaisilog</button>
+            <button class="btn" onclick="addToCart('Siomaisilog', 99)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -409,22 +589,36 @@
           <p>Corned beef, garlic rice, and egg.</p>
           <div class="price">₱99</div>
           <div class="card-actions">
-            <button class="btn" onclick="selectMeal('Cornsilog')">Order Cornsilog</button>
+            <button class="btn" onclick="addToCart('Cornsilog', 99)">Add to Cart</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="order">
-    <h2>Place Your Order</h2>
+  <section id="checkout">
+    <h2>Your Cart & Checkout</h2>
     <p class="section-text">
-      Choose your meal, fill out the form, and send your order directly through Facebook Messenger.
+      Review the customer order, fill out contact details, then send the full order to ThugEye Silogan.
     </p>
 
-    <div class="order-grid">
-      <div class="order-box">
-        <form id="orderForm">
+    <div class="checkout-grid">
+      <div class="checkout-box">
+        <h3>Cart</h3>
+        <div id="cartItems" class="cart-empty">Your cart is empty. Add meals from the menu first.</div>
+        <div class="cart-total">
+          <span>Total</span>
+          <span id="cartTotal">₱0</span>
+        </div>
+        <div class="quick-links">
+          <button class="btn secondary" onclick="clearCart()">Clear Cart</button>
+          <a class="btn secondary" href="#menu">Add More</a>
+        </div>
+      </div>
+
+      <div class="checkout-box">
+        <h3>Customer Details</h3>
+        <form id="checkoutForm">
           <div>
             <label for="customerName">Your Name</label>
             <input type="text" id="customerName" placeholder="Enter your name" required />
@@ -436,51 +630,30 @@
           </div>
 
           <div>
-            <label for="meal">Select Meal</label>
-            <select id="meal" required>
-              <option value="">Choose a meal</option>
-              <option value="Tapsilog">Tapsilog - ₱99</option>
-              <option value="Sisilog">Sisilog - ₱89</option>
-              <option value="Porksilog">Porksilog - ₱85</option>
-              <option value="ChixSilog">ChixSilog - ₱109</option>
-              <option value="Hotsilog">Hotsilog - ₱79</option>
-              <option value="Shangsilog">Shangsilog - ₱99</option>
-              <option value="Siomaisilog">Siomaisilog - ₱99</option>
-              <option value="Cornsilog">Cornsilog - ₱99</option>
+            <label for="orderType">Order Type</label>
+            <select id="orderType" required>
+              <option value="Pickup">Pickup</option>
+              <option value="Dine-in">Dine-in</option>
+              <option value="Delivery">Delivery</option>
             </select>
           </div>
 
           <div>
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" min="1" value="1" required />
+            <label for="customerAddress">Address / Location Notes</label>
+            <textarea id="customerAddress" placeholder="For delivery, enter your address. For pickup or dine-in, you may leave this blank."></textarea>
           </div>
 
           <div>
-            <label for="notes">Notes</label>
-            <textarea id="notes" placeholder="Extra rice, no egg, add drinks, etc."></textarea>
+            <label for="notes">Extra Notes</label>
+            <textarea id="notes" placeholder="Example: no egg, extra rice, no spicy, etc."></textarea>
           </div>
 
-          <button type="submit" class="btn success">Send Order on Facebook</button>
+          <button type="submit" class="btn success">Send Full Order</button>
         </form>
-      </div>
 
-      <div class="order-box">
-        <h3>How Ordering Works</h3>
         <p class="order-note">
-          This version uses Facebook Messenger so customers can send their order quickly.
-          It is simple, easy, and works well for a small local business.
+          Note: This system prepares the order summary. The customer still needs to send it through Facebook or call the store for confirmation.
         </p>
-        <ul>
-          <li>Click any <strong>Order</strong> button from the menu</li>
-          <li>The selected meal will appear in the form</li>
-          <li>Fill in customer details</li>
-          <li>Submit to send the order through Facebook</li>
-        </ul>
-
-        <div class="quick-links">
-          <a class="btn secondary" href="tel:09934195077">Call Now</a>
-          <a class="btn secondary" href="https://www.facebook.com/profile.php?id=61572936666348" target="_blank">Open Facebook Page</a>
-        </div>
       </div>
     </div>
   </section>
@@ -548,10 +721,8 @@
   <section>
     <div class="cta">
       <h2>Order Your Favorite Silog Today</h2>
-      <p>
-        Fast, filling, and budget-friendly meals for everyone.
-      </p>
-      <a class="btn" href="#order">Order Now</a>
+      <p>Fast, filling, and budget-friendly meals for everyone.</p>
+      <a class="btn" href="#menu">Start Ordering</a>
     </div>
   </section>
 
@@ -560,27 +731,147 @@
     Website made with care for a local Filipino business.
   </footer>
 
+  <div class="mobile-sticky-bar">
+    <a class="btn" href="#checkout">Cart: <span id="mobileCartCount">0</span></a>
+    <a class="btn secondary" href="tel:09934195077">Call Us</a>
+  </div>
+
+  <div id="toast" class="toast">Added to cart</div>
+
   <script>
-    function selectMeal(mealName) {
-      document.getElementById('meal').value = mealName;
-      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    let cart = [];
+
+    function addToCart(name, price) {
+      const existingItem = cart.find(item => item.name === name);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+
+      updateCart();
+      showToast(`${name} added to cart`);
     }
 
-    document.getElementById('orderForm').addEventListener('submit', function (e) {
+    function increaseQuantity(name) {
+      const item = cart.find(item => item.name === name);
+      if (item) {
+        item.quantity += 1;
+        updateCart();
+      }
+    }
+
+    function decreaseQuantity(name) {
+      const item = cart.find(item => item.name === name);
+      if (!item) return;
+
+      item.quantity -= 1;
+
+      if (item.quantity <= 0) {
+        removeFromCart(name);
+      } else {
+        updateCart();
+      }
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name);
+      updateCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      updateCart();
+      showToast('Cart cleared');
+    }
+
+    function getCartTotal() {
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
+    function getCartCount() {
+      return cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      const cartCount = document.getElementById('cartCount');
+      const mobileCartCount = document.getElementById('mobileCartCount');
+
+      if (cart.length === 0) {
+        cartItems.className = 'cart-empty';
+        cartItems.innerHTML = 'Your cart is empty. Add meals from the menu first.';
+      } else {
+        cartItems.className = '';
+        cartItems.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div>
+              <strong>${item.name}</strong>
+              <small>₱${item.price} x ${item.quantity} = ₱${item.price * item.quantity}</small>
+            </div>
+            <div>
+              <div class="quantity-controls">
+                <button class="qty-btn" onclick="decreaseQuantity('${item.name}')">-</button>
+                <span>${item.quantity}</span>
+                <button class="qty-btn" onclick="increaseQuantity('${item.name}')">+</button>
+              </div>
+              <button class="btn danger" onclick="removeFromCart('${item.name}')">Remove</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      cartTotal.textContent = `₱${getCartTotal()}`;
+      cartCount.textContent = getCartCount();
+      mobileCartCount.textContent = getCartCount();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 1800);
+    }
+
+    document.getElementById('checkoutForm').addEventListener('submit', function (e) {
       e.preventDefault();
+
+      if (cart.length === 0) {
+        alert('Your cart is empty. Please add at least one meal first.');
+        return;
+      }
 
       const name = document.getElementById('customerName').value.trim();
       const phone = document.getElementById('customerPhone').value.trim();
-      const meal = document.getElementById('meal').value;
-      const quantity = document.getElementById('quantity').value;
+      const orderType = document.getElementById('orderType').value;
+      const address = document.getElementById('customerAddress').value.trim();
       const notes = document.getElementById('notes').value.trim();
 
-      const message = `Hello ThugEye Silogan!%0A%0AI want to order:%0A- Meal: ${meal}%0A- Quantity: ${quantity}%0A- Name: ${name}%0A- Phone: ${phone}%0A- Notes: ${notes || 'None'}`;
+      const orderList = cart
+        .map(item => `${item.quantity}x ${item.name} - ₱${item.price * item.quantity}`)
+        .join('\n');
+
+      const message = `Hello ThugEye Silogan!\n\nI want to order:\n${orderList}\n\nTotal: ₱${getCartTotal()}\nOrder Type: ${orderType}\nName: ${name}\nPhone: ${phone}\nAddress/Location: ${address || 'N/A'}\nNotes: ${notes || 'None'}\n\nPlease confirm my order. Thank you!`;
+
+      const encodedMessage = encodeURIComponent(message);
       const facebookPage = 'https://www.facebook.com/profile.php?id=61572936666348';
 
-      alert('Your order details are ready. Please send this order message to the Facebook page.');
-      window.open(facebookPage, '_blank');
+      navigator.clipboard.writeText(message).then(() => {
+        alert('Order summary copied. Please paste it in Facebook Messenger and send it to ThugEye Silogan.');
+        window.open(facebookPage, '_blank');
+      }).catch(() => {
+        alert(message);
+        window.open(facebookPage, '_blank');
+      });
     });
+
+    updateCart();
   </script>
 </body>
 </html>
+
